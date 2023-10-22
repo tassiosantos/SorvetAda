@@ -37,15 +37,15 @@ public class ClientController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ClientDto> getClienteById(@PathVariable("id") Long idClient) {
-        return new ResponseEntity<Client>(clientService.getById(idClient), HttpStatus.OK);
-    }
-
-    @GetMapping("/nome")
-    public ResponseEntity<List<Client>> getClienteByNome(@RequestParam("nome") String name) {
-        return new ResponseEntity<Client>(clientService.getByName(name), HttpStatus.OK);
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ClientDto> getClienteById(@PathVariable("id") Long idClient) {
+//        return new ResponseEntity<Client>(clientService.getById(idClient), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/nome")
+//    public ResponseEntity<List<Client>> getClienteByNome(@RequestParam("nome") String name) {
+//        return new ResponseEntity<Client>(clientService.getByName(name), HttpStatus.OK);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCliente(@PathVariable("id") Long id) {

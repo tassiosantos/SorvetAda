@@ -22,11 +22,11 @@ public class ClientService {
     }
 
 
-    public Object getById(Long id) {
-        Optional<Client> optCliente = clientRepository.findById(id);
-        Client cliente = optCliente.orElseThrow(() -> new RuntimeException("Não existe cliente com esse id"));
-        return cliente;
-    }
+//    public Object getById(Long id) {
+//        Optional<Client> optCliente = clientRepository.findById(id);
+//        Client cliente = optCliente.orElseThrow(() -> new RuntimeException("Não existe cliente com esse id"));
+//        return cliente;
+//    }
 
     public ClientDto createNewClient(ClientDto cliente) {
         return cliente;
