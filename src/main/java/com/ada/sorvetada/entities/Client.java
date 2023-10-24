@@ -1,10 +1,6 @@
 package com.ada.sorvetada.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -13,37 +9,68 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
-    private String nome;
-    private LocalDate dataNascimento;
-    private String endereço;
+    @Column(nullable = false)
+    private String name;
+    @Column(unique = true, nullable = false)
+    private String cpf;
+    private LocalDate birthDate;
+    private String address;
+    private String email;
+    private String password;
 
     public Long getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getName() {
+        return name;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public String getCpf() {
+        return cpf;
     }
 
-    public String getEndereço() {
-        return endereço;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public void setEndereço(String endereço) {
-        this.endereço = endereço;
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
