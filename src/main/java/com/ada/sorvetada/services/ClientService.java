@@ -1,7 +1,7 @@
 package com.ada.sorvetada.services;
 
 import com.ada.sorvetada.dtos.ClientDto;
-import com.ada.sorvetada.entities.Client;
+import com.ada.sorvetada.entities.Customer;
 import com.ada.sorvetada.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class ClientService {
     }
 
 
-    public List<Client> getAll() {
+    public List<Customer> getAll() {
         return null;
     }
 

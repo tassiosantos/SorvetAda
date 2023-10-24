@@ -7,21 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "icecreams")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ClientAddress {
-
+@AllArgsConstructor
+public class Icecream {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Client client;
+    @Column(nullable = false)
+    private String name;
 
-    @ManyToOne
-    private Address address;
-
-
+    @Column(nullable = false)
+    private double unitPrice;
 }

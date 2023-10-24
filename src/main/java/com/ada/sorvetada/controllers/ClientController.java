@@ -1,7 +1,7 @@
 package com.ada.sorvetada.controllers;
 
 import com.ada.sorvetada.dtos.ClientDto;
-import com.ada.sorvetada.entities.Client;
+import com.ada.sorvetada.entities.Customer;
 import com.ada.sorvetada.services.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class ClientController {
     }
 
     @GetMapping("/all")
-    public List<Client> getClientes() {
+    public List<Customer> getClientes() {
         return clientService.getAll();
     }
 
