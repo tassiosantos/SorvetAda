@@ -3,6 +3,7 @@ package com.ada.sorvetada.services;
 import com.ada.sorvetada.dtos.CustomerDto;
 import com.ada.sorvetada.entities.Customer;
 import com.ada.sorvetada.repositories.CustomerRepository;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +31,16 @@ public class CustomerService {
     }
 
 
-    public Customer getById(Long id) {
+    public CustomerDto getById(Long id) {
         Optional<Customer> optCustomer = customerRepository.findById(id);
-        Customer cliente = optCustomer.orElseThrow(() -> new RuntimeException("Does not exist customer by id"));
-        return cliente;
+        Customer customer = optCustomer.orElseThrow(() -> new RuntimeException("Does not exist customer by id"));
+        return createNewCustomer(customer);
+    }
+
+    public CustomerDto getByEmail(String email) {
+        Optional<Customer> optCustomer = customerRepository.findByEmail(email);
+        Customer customer = optCustomer.orElseThrow(() -> new RuntimeException("Does not exist customer by email"));
+        return createNewCustomer(customer);
     }
 
 
@@ -74,5 +81,6 @@ public class CustomerService {
         Customer savedCustomer = customerRepository.save(cliente);
         return createNewCustomer(savedCustomer);
     }
+
 
 }
