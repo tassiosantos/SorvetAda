@@ -23,7 +23,7 @@ public class Customer implements Serializable {
     @Column(nullable = false)
     private String password;
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<CustomerAddress> addressList;
 
     public Customer() {
