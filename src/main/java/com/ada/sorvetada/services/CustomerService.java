@@ -13,13 +13,11 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
-    private CustomerRepository customerRepository;
-    private PasswordEncoder passwordEncoder;
+    private final CustomerRepository customerRepository;
 
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-
 
     public List<Customer> getAll() {
         return customerRepository.findAll();
@@ -55,7 +53,7 @@ public class CustomerService {
         return customerRepository.findByName(name);
     }
 
-    public void deleteClient(Long id) {
+    public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }
 
@@ -63,22 +61,29 @@ public class CustomerService {
         customerRepository.activeUser(active, id);
     }
 
-    public CustomerDto saveCustumer(CustomerDto customerDTO) {
+/*    public CustomerDto saveCustumer(CustomerDto customerDTO) {
         Customer customer = new Customer(customerDTO.getName(),
                 customerDTO.getCpf(), customerDTO.getEmail(), passwordEncoder.encode(customerDTO.getPassword()),
                 customerDTO.isActive());
         Customer savedCustomer = customerRepository.save(customer);
         return createNewCustomer(savedCustomer);
-    }
+    }*/
+public CustomerDto saveCustumer(CustomerDto customerDTO) {
+    Customer customer = new Customer(customerDTO.getName(),
+            customerDTO.getCpf(), customerDTO.getEmail(), customerDTO.getPassword(),
+            customerDTO.isActive());
+    Customer savedCustomer = customerRepository.save(customer);
+    return createNewCustomer(savedCustomer);
+}
 
     public CustomerDto updateCustomer(CustomerDto customerDTO) {
         Optional<Customer> optCustomer = customerRepository.findById(customerDTO.getId());
-        Customer cliente = optCustomer.orElseThrow(() -> new RuntimeException("Não existe cliente com esse id"));
+        Customer customer = optCustomer.orElseThrow(() -> new RuntimeException("Doesn't exist client by id"));
         if (customerDTO.getEmail() != null && !customerDTO.getEmail().isEmpty())
-            cliente.setEmail(customerDTO.getEmail());
+            customerDTO.setEmail(customerDTO.getEmail());
         if (customerDTO.getName() != null && !customerDTO.getName().isEmpty())
-            cliente.setName(customerDTO.getName());
-        Customer savedCustomer = customerRepository.save(cliente);
+            customer.setName(customerDTO.getName());
+        Customer savedCustomer = customerRepository.save(customer);
         return createNewCustomer(savedCustomer);
     }
 
