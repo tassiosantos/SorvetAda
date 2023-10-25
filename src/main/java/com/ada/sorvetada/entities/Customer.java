@@ -33,17 +33,17 @@ public class Customer implements Serializable {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
-        this.active = active;
         this.email = email;
         this.password = password;
+        this.active = active;
     }
 
     public Customer(String name, String cpf, String email, String password, boolean active) {
         this.name = name;
         this.cpf = cpf;
-        this.active = active;
         this.email = email;
         this.password = password;
+        this.active = active;
     }
 
     public Long getId() {

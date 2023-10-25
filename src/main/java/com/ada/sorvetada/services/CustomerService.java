@@ -45,7 +45,7 @@ public class CustomerService {
     public CustomerDto createNewCustomer(Customer customer) {
         return CustomerDto.builder().id(customer.getId())
                 .name(customer.getName())
-                .email(customer.getEmail()).cpf(customer.getCpf())
+                .cpf(customer.getCpf()).email(customer.getEmail())
                 .password(customer.getPassword()).active(customer.isActive()).build();
     }
 
