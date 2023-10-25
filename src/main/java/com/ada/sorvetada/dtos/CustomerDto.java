@@ -15,9 +15,9 @@ public class CustomerDto {
     private Long id;
     private String name;
     private String cpf;
-    private boolean active;
     private String email;
     private String password;
+    private boolean active;
     private List<CustomerAddress> addressList;
 
     public Long getId() {

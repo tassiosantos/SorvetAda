@@ -29,7 +29,7 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(Long id, String name, String cpf, boolean active, String email, String password) {
+    public Customer(Long id, String name, String cpf, String email, String password, boolean active) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;

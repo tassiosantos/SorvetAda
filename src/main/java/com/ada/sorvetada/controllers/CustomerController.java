@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("sorvetada/api/customer")
+@RequestMapping("/sorvetada/api/customer")
 public class CustomerController {
     CustomerService customerService;
 
@@ -61,13 +61,13 @@ public class CustomerController {
                 HttpStatus.OK);
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<CustomerDto> getCustomerByEmail(@PathVariable("email") String email) {
+    @GetMapping("/email")
+    public ResponseEntity<CustomerDto> getCustomerByEmail(@RequestParam("email") String email) {
         return new ResponseEntity<>(customerService.getByEmail(email),
                 HttpStatus.OK);
     }
 
-    @GetMapping("name")
+    @GetMapping("/name")
     public ResponseEntity<List<Customer>> getCustomerByName(@RequestParam("name") String name) {
         return new ResponseEntity<>(customerService.getByName(name), HttpStatus.OK);
     }
@@ -90,8 +90,8 @@ public class CustomerController {
 //    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCliente(@PathVariable("id") Long id) {
-        customerService.deleteClient(id);
+    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") Long id) {
+        customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
