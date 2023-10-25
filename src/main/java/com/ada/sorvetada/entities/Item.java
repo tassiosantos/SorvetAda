@@ -1,10 +1,7 @@
 package com.ada.sorvetada.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "items")
@@ -12,15 +9,23 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+// @EqualsAndHashCode(of = {"id", "order", "product", "quantity"})
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(
+            // fetch = FetchType.LAZY,
+            // cascade = CascadeType.PERSIST,
+            // cascade = CascadeType.ALL,
+            // optional = false,
+            targetEntity = Order.class
+    )
+    @JoinColumn(name="order_id")
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Icecream product;
 
     @Column(nullable = false)
