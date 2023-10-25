@@ -1,50 +1,24 @@
-package com.ada.sorvetada.entities;
+package com.ada.sorvetada.dtos;
 
+
+import com.ada.sorvetada.entities.CustomerAddress;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
 
-import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table
-public class Customer implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Data
+@Builder
+public class CustomerDto {
     private Long id;
-    @Column(nullable = false)
     private String name;
-    @Column(unique = true, nullable = false)
     private String cpf;
-    @Column(nullable = false)
     private boolean active;
-    @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = false)
     private String password;
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private List<CustomerAddress> addressList;
-
-    public Customer() {
-    }
-
-    public Customer(Long id, String name, String cpf, boolean active, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.cpf = cpf;
-        this.active = active;
-        this.email = email;
-        this.password = password;
-    }
-
-    public Customer(String name, String cpf, String email, String password, boolean active) {
-        this.name = name;
-        this.cpf = cpf;
-        this.active = active;
-        this.email = email;
-        this.password = password;
-    }
 
     public Long getId() {
         return id;
