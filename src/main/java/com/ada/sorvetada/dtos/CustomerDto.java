@@ -3,5 +3,5 @@ package com.ada.sorvetada.dtos;
 
 
 
-public class ClientDto {
+public class CustomerDto {
 }

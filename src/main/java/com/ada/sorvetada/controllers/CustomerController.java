@@ -1,8 +1,8 @@
 package com.ada.sorvetada.controllers;
 
-import com.ada.sorvetada.dtos.ClientDto;
+import com.ada.sorvetada.dtos.CustomerDto;
 import com.ada.sorvetada.entities.Customer;
-import com.ada.sorvetada.services.ClientService;
+import com.ada.sorvetada.services.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,24 +11,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("sorvetada/api/client")
-public class ClientController {
-    ClientService clientService;
+public class CustomerController {
+    CustomerService customerService;
 
 
-    public ClientController(ClientService clientService){
-        this.clientService = clientService;
+    public CustomerController(CustomerService customerService){
+        this.customerService = customerService;
     }
 
     @GetMapping("/all")
     public List<Customer> getClientes() {
-        return clientService.getAll();
+        return customerService.getAll();
     }
 
 
     @PostMapping("")
-    public ResponseEntity<ClientDto> saveCliente(@RequestBody ClientDto cliente) {
+    public ResponseEntity<CustomerDto> saveCliente(@RequestBody CustomerDto cliente) {
         try {
-            ClientDto savedCliente = clientService.createNewClient(cliente);
+            CustomerDto savedCliente = customerService.createNewClient(cliente);
             if (savedCliente != null)
                 return new ResponseEntity<>(savedCliente, HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,7 +49,7 @@ public class ClientController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCliente(@PathVariable("id") Long id) {
-        clientService.deleteClient(id);
+        customerService.deleteClient(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

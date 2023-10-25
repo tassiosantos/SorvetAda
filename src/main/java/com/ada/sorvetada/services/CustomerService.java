@@ -1,19 +1,19 @@
 package com.ada.sorvetada.services;
 
-import com.ada.sorvetada.dtos.ClientDto;
+import com.ada.sorvetada.dtos.CustomerDto;
 import com.ada.sorvetada.entities.Customer;
-import com.ada.sorvetada.repositories.ClientRepository;
+import com.ada.sorvetada.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ClientService {
+public class CustomerService {
 
-    private ClientRepository clientRepository;
+    private CustomerRepository customerRepository;
 
-    public ClientService(ClientRepository clientRepository){
-        this.clientRepository = clientRepository;
+    public CustomerService(CustomerRepository customerRepository){
+        this.customerRepository = customerRepository;
     }
 
 
@@ -28,7 +28,7 @@ public class ClientService {
 //        return cliente;
 //    }
 
-    public ClientDto createNewClient(ClientDto cliente) {
+    public CustomerDto createNewClient(CustomerDto cliente) {
         return cliente;
     }
 
