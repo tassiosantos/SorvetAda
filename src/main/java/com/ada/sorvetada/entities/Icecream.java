@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "icecreams")
+@Table
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Icecream {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +20,18 @@ public class Icecream {
     private String name;
 
     @Column(nullable = false)
-    private double unitPrice;
+    private Double unitPrice;
+
+    @Column(nullable = false)
+    private int availableUnits;
+
+    @Column(nullable = false)
+    private String urlPhoto;
+
+    public Icecream (String name, double unitPrice, int availableUnits, String urlPhoto){
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.availableUnits = availableUnits;
+        this.urlPhoto = urlPhoto;
+    }
 }

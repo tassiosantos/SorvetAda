@@ -1,3 +1,4 @@
+
 package com.ada.sorvetada.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -94,3 +95,4 @@ public class Customer implements Serializable {
         this.password = password;
     }
 }
+

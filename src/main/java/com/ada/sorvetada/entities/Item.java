@@ -1,3 +1,4 @@
+
 package com.ada.sorvetada.entities;
 
 import jakarta.persistence.*;

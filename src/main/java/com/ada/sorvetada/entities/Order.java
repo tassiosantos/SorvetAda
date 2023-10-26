@@ -1,3 +1,4 @@
+
 package com.ada.sorvetada.entities;
 
 import jakarta.persistence.*;
@@ -21,25 +22,7 @@ public class Order {
 
     private double totalPrice;
 
-    /*@ManyToMany(
-            fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
-            // cascade = CascadeType.ALL
-    )
-    @JoinTable(
-            name = "orders_items",
-            joinColumns = @JoinColumn(
-                    name = "order_id",
-                    referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "item_id",
-                    referencedColumnName = "id"
-            )
-    )*/
+
     @OneToMany(
             // fetch = FetchType.LAZY,
             // fetch = FetchType.EAGER,
@@ -53,3 +36,4 @@ public class Order {
     )
     private List<Item> items;
 }
+
