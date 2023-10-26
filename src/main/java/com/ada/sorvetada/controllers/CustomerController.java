@@ -40,7 +40,7 @@ public class CustomerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+  
     @PutMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerDto customer) {
@@ -92,7 +92,6 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-
 //    @GetMapping("/{id}")
 //    public ResponseEntity<ClientDto> getClienteById(@PathVariable("id") Long idClient) {
 //        return new ResponseEntity<Client>(clientService.getById(idClient), HttpStatus.OK);
@@ -122,6 +121,4 @@ public class CustomerController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // Ou outro código de status apropriado
         }
     }
-
-
 }

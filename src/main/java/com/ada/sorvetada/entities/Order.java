@@ -1,10 +1,7 @@
 package com.ada.sorvetada.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -24,7 +21,14 @@ public class Order {
 
     private double totalPrice;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    /*@ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+            // cascade = CascadeType.ALL
+    )
     @JoinTable(
             name = "orders_items",
             joinColumns = @JoinColumn(
@@ -35,6 +39,17 @@ public class Order {
                     name = "item_id",
                     referencedColumnName = "id"
             )
+    )*/
+    @OneToMany(
+            // fetch = FetchType.LAZY,
+            // fetch = FetchType.EAGER,
+            mappedBy = "order",
+            /*cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }*/
+            cascade = CascadeType.ALL/*,
+            orphanRemoval = true*/
     )
     private List<Item> items;
 }

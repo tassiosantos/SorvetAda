@@ -3,6 +3,7 @@ package com.ada.sorvetada.services;
 import com.ada.sorvetada.dtos.CustomerDto;
 import com.ada.sorvetada.entities.Customer;
 import com.ada.sorvetada.repositories.CustomerRepository;
+
 import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import java.util.Optional;
 
 @Service
 public class CustomerService {
-
     private final CustomerRepository customerRepository;
 
     public CustomerService(CustomerRepository customerRepository) {
@@ -68,13 +68,13 @@ public class CustomerService {
         Customer savedCustomer = customerRepository.save(customer);
         return createNewCustomer(savedCustomer);
     }*/
-public CustomerDto saveCustumer(CustomerDto customerDTO) {
-    Customer customer = new Customer(customerDTO.getName(),
-            customerDTO.getCpf(), customerDTO.getEmail(), customerDTO.getPassword(),
-            customerDTO.isActive());
-    Customer savedCustomer = customerRepository.save(customer);
-    return createNewCustomer(savedCustomer);
-}
+    public CustomerDto saveCustumer(CustomerDto customerDTO) {
+        Customer customer = new Customer(customerDTO.getName(),
+                customerDTO.getCpf(), customerDTO.getEmail(), customerDTO.getPassword(),
+                customerDTO.isActive());
+        Customer savedCustomer = customerRepository.save(customer);
+        return createNewCustomer(savedCustomer);
+    }
 
     public CustomerDto updateCustomer(CustomerDto customerDTO) {
         Optional<Customer> optCustomer = customerRepository.findById(customerDTO.getId());
@@ -103,6 +103,4 @@ public CustomerDto saveCustumer(CustomerDto customerDTO) {
         // Se o email e senha não corresponderem, retorne null ou lance uma exceção adequada
         return null;
     }
-
-
 }
