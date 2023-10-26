@@ -3,40 +3,104 @@ package com.ada.sorvetada.services;
 import com.ada.sorvetada.dtos.CustomerDto;
 import com.ada.sorvetada.entities.Customer;
 import com.ada.sorvetada.repositories.CustomerRepository;
+
+import org.apache.logging.log4j.message.StringFormattedMessage;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
+    private final CustomerRepository customerRepository;
 
-    private CustomerRepository customerRepository;
-
-    public CustomerService(CustomerRepository customerRepository){
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
-
     public List<Customer> getAll() {
+        return customerRepository.findAll();
+    }
+
+    public List<Customer> getAllActive() {
+        boolean active = true;
+        return customerRepository.findByActive(active);
+    }
+
+
+    public CustomerDto getById(Long id) {
+        Optional<Customer> optCustomer = customerRepository.findById(id);
+        Customer customer = optCustomer.orElseThrow(() -> new RuntimeException("Does not exist customer by id"));
+        return createNewCustomer(customer);
+    }
+
+    public CustomerDto getByEmail(String email) {
+        Optional<Customer> optCustomer = customerRepository.findByEmail(email);
+        Customer customer = optCustomer.orElseThrow(() -> new RuntimeException("Does not exist customer by email"));
+        return createNewCustomer(customer);
+    }
+
+
+    public CustomerDto createNewCustomer(Customer customer) {
+        return CustomerDto.builder().id(customer.getId())
+                .name(customer.getName())
+                .cpf(customer.getCpf()).email(customer.getEmail())
+                .password(customer.getPassword()).active(customer.isActive()).build();
+    }
+
+    public List<Customer> getByName(String name) {
+        return customerRepository.findByName(name);
+    }
+
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
+    }
+
+    public void activateDisableCustomer(boolean active, Long id) {
+        customerRepository.activeUser(active, id);
+    }
+
+/*    public CustomerDto saveCustumer(CustomerDto customerDTO) {
+        Customer customer = new Customer(customerDTO.getName(),
+                customerDTO.getCpf(), customerDTO.getEmail(), passwordEncoder.encode(customerDTO.getPassword()),
+                customerDTO.isActive());
+        Customer savedCustomer = customerRepository.save(customer);
+        return createNewCustomer(savedCustomer);
+    }*/
+    public CustomerDto saveCustumer(CustomerDto customerDTO) {
+        Customer customer = new Customer(customerDTO.getName(),
+                customerDTO.getCpf(), customerDTO.getEmail(), customerDTO.getPassword(),
+                customerDTO.isActive());
+        Customer savedCustomer = customerRepository.save(customer);
+        return createNewCustomer(savedCustomer);
+    }
+
+    public CustomerDto updateCustomer(CustomerDto customerDTO) {
+        Optional<Customer> optCustomer = customerRepository.findById(customerDTO.getId());
+        Customer customer = optCustomer.orElseThrow(() -> new RuntimeException("Doesn't exist client by id"));
+        if (customerDTO.getEmail() != null && !customerDTO.getEmail().isEmpty())
+            customerDTO.setEmail(customerDTO.getEmail());
+        if (customerDTO.getName() != null && !customerDTO.getName().isEmpty())
+            customer.setName(customerDTO.getName());
+        Customer savedCustomer = customerRepository.save(customer);
+        return createNewCustomer(savedCustomer);
+    }
+
+    public CustomerDto authenticate(String email, String password) {
+        // Busque o cliente com base no email
+        Optional<Customer> optCustomer = customerRepository.findByEmail(email);
+
+        if (optCustomer.isPresent()) {
+            Customer customer = optCustomer.get();
+
+            // Verifique se a senha fornecida corresponde à senha armazenada
+            if (customer.getPassword().equals(password)) {
+                return createNewCustomer(customer);
+            }
+        }
+
+        // Se o email e senha não corresponderem, retorne null ou lance uma exceção adequada
         return null;
-    }
-
-
-//    public Object getById(Long id) {
-//        Optional<Client> optCliente = clientRepository.findById(id);
-//        Client cliente = optCliente.orElseThrow(() -> new RuntimeException("Não existe cliente com esse id"));
-//        return cliente;
-//    }
-
-    public CustomerDto createNewClient(CustomerDto cliente) {
-        return cliente;
-    }
-
-    public Object getByName(String name) {
-        return null;
-    }
-
-    public void deleteClient(Long id) {
-
     }
 }
