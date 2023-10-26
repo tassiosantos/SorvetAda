@@ -34,10 +34,10 @@ public class IcecreamService {
 
     }
 
-    public boolean deleteIcecream (IcecreamDto icecreamDto){
-        Optional<Icecream> optIcecream = icecreamRepository.findById(icecreamDto.getId());
+    public boolean deleteIcecream (Long id){
+        Optional<Icecream> optIcecream = icecreamRepository.findById(id);
         if(optIcecream.isPresent()){
-            icecreamRepository.deleteById(icecreamDto.getId());
+            icecreamRepository.deleteById(id);
             return true;
         }else {
             throw new RuntimeException("Sorvete não encontrado com esse ID");
@@ -45,26 +45,24 @@ public class IcecreamService {
 
     }
 
-    public boolean updateUnitPriceById(IcecreamDto icecreamDto) {
+    public IcecreamDto updateUnitPriceById(IcecreamDto icecreamDto) {
         Optional<Icecream> optIcecream = icecreamRepository.findById(icecreamDto.getId());
+        Icecream icecream = optIcecream.orElseThrow(() -> new RuntimeException("Doesn't exist icecream by id"));
 
-        if (optIcecream.isPresent() && icecreamDto.getUnitPrice() != null) {
-            icecreamRepository.updateUnitPrice(icecreamDto.getUnitPrice(), icecreamDto.getId());
-            return true;
-        }else {
-            throw new RuntimeException("Sorvete não encontrado com esse ID");
-        }
+        icecream.setUnitPrice(icecreamDto.getUnitPrice());
+        Icecream updatedIcecream = icecreamRepository.save(icecream);
+        return createNewIcecream(updatedIcecream);
     }
 
-    public boolean updateUrlPhotoById(IcecreamDto icecreamDto) {
-        Optional<Icecream> optIcecream = icecreamRepository.findById(icecreamDto.getId());
 
-        if (optIcecream.isPresent() && icecreamDto.getUrlPhoto() != null && icecreamDto.getUrlPhoto().isEmpty()) {
-            icecreamRepository.updateUrlPhoto(icecreamDto.getUrlPhoto(), icecreamDto.getId());
-            return true;
-        }else {
-            throw new RuntimeException("Sorvete não encontrado com esse ID");
-        }
+    public IcecreamDto updateUrlPhotoById(IcecreamDto icecreamDto) {
+        Optional<Icecream> optIcecream = icecreamRepository.findById(icecreamDto.getId());
+        Icecream icecream = optIcecream.orElseThrow(() -> new RuntimeException("Doesn't exist icecream by id"));
+
+        icecream.setUrlPhoto(icecreamDto.getUrlPhoto());
+        Icecream updatedIcecream = icecreamRepository.save(icecream);
+
+        return createNewIcecream(updatedIcecream);
     }
 
 
