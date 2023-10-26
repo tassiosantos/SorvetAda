@@ -1,6 +1,6 @@
 package com.ada.sorvetada.dtos;
 
-import jakarta.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;
 
 public record ItemRequestPutDto(
         // @NotNull(message = "O campo id do item é obrigatório!")
