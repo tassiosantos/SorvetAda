@@ -1,3 +1,4 @@
+
 package com.ada.sorvetada.controllers;
 
 import com.ada.sorvetada.dtos.CustomerDto;
@@ -95,12 +96,7 @@ public class CustomerController {
 //    @GetMapping("/{id}")
 //    public ResponseEntity<ClientDto> getClienteById(@PathVariable("id") Long idClient) {
 //        return new ResponseEntity<Client>(clientService.getById(idClient), HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/nome")
-//    public ResponseEntity<List<Client>> getClienteByNome(@RequestParam("nome") String name) {
-//        return new ResponseEntity<Client>(clientService.getByName(name), HttpStatus.OK);
-//    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable("id") Long id) {
@@ -122,3 +118,4 @@ public class CustomerController {
         }
     }
 }
+

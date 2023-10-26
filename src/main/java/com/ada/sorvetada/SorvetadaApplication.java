@@ -9,7 +9,6 @@ import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 @EnableFeignClients
 @SpringBootApplication
 public class SorvetadaApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SorvetadaApplication.class, args);
 	}
