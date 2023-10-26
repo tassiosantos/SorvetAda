@@ -55,11 +55,25 @@ public class CustomerController {
         }
     }
 
+    @PatchMapping("/{id}/activate")
+    public ResponseEntity<Void> activateOrDeactivateCustomer(
+            @PathVariable("id") Long id,
+            @RequestParam("active") boolean active
+    ) {
+        try {
+            customerService.activateDisableCustomer(active, id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<CustomerDto> getCustomerById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(customerService.getById(id),
                 HttpStatus.OK);
     }
+
 
     @GetMapping("/email")
     public ResponseEntity<CustomerDto> getCustomerByEmail(@RequestParam("email") String email) {
@@ -93,6 +107,20 @@ public class CustomerController {
     public ResponseEntity<Void> deleteCustomer(@PathVariable("id") Long id) {
         customerService.deleteCustomer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<CustomerDto> authenticateCustomer(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password
+    ) {
+        CustomerDto authenticatedCustomer = customerService.authenticate(email, password);
+
+        if (authenticatedCustomer != null) {
+            return new ResponseEntity<>(authenticatedCustomer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // Ou outro código de status apropriado
+        }
     }
 
 

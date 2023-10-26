@@ -87,5 +87,22 @@ public CustomerDto saveCustumer(CustomerDto customerDTO) {
         return createNewCustomer(savedCustomer);
     }
 
+    public CustomerDto authenticate(String email, String password) {
+        // Busque o cliente com base no email
+        Optional<Customer> optCustomer = customerRepository.findByEmail(email);
+
+        if (optCustomer.isPresent()) {
+            Customer customer = optCustomer.get();
+
+            // Verifique se a senha fornecida corresponde à senha armazenada
+            if (customer.getPassword().equals(password)) {
+                return createNewCustomer(customer);
+            }
+        }
+
+        // Se o email e senha não corresponderem, retorne null ou lance uma exceção adequada
+        return null;
+    }
+
 
 }
