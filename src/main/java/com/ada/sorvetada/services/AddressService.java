@@ -25,8 +25,8 @@ public class AddressService {
 
     private final CustomerRepository customerRepository;
 
-   public AddressDto requestCep(AddressDto cepAddress){
-        return addressFeign.searchAddressCep(cepAddress.getCep());        
+   public AddressDto requestCep1(AddressDto cepAddress){
+        return addressFeign.searchAddressCep1(cepAddress.getCep());
    }
 
 
