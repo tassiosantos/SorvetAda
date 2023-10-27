@@ -45,25 +45,30 @@ public class IcecreamService {
 
     }
 
-    public IcecreamDto updateUnitPriceById(IcecreamDto icecreamDto) {
+    public boolean updateUnitPriceById(IcecreamDto icecreamDto) {
         Optional<Icecream> optIcecream = icecreamRepository.findById(icecreamDto.getId());
         Icecream icecream = optIcecream.orElseThrow(() -> new RuntimeException("Doesn't exist icecream by id"));
 
         icecream.setUnitPrice(icecreamDto.getUnitPrice());
         Icecream updatedIcecream = icecreamRepository.save(icecream);
-        return createNewIcecream(updatedIcecream);
+        createNewIcecream(updatedIcecream);
+        return true;
     }
 
 
-    public IcecreamDto updateUrlPhotoById(IcecreamDto icecreamDto) {
+    public boolean updateUrlPhotoById(IcecreamDto icecreamDto) {
+
         Optional<Icecream> optIcecream = icecreamRepository.findById(icecreamDto.getId());
         Icecream icecream = optIcecream.orElseThrow(() -> new RuntimeException("Doesn't exist icecream by id"));
 
-        icecream.setUrlPhoto(icecreamDto.getUrlPhoto());
-        Icecream updatedIcecream = icecreamRepository.save(icecream);
-
-        return createNewIcecream(updatedIcecream);
+        if (!icecream.getUrlPhoto().equals(icecreamDto.getUrlPhoto())) {
+            icecream.setUrlPhoto(icecreamDto.getUrlPhoto());
+            Icecream updatedIcecream = icecreamRepository.save(icecream);
+            createNewIcecream(updatedIcecream);
+        }
+        return true;
     }
+
 
 
 

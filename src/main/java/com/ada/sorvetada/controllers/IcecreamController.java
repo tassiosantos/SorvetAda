@@ -44,11 +44,13 @@ public class IcecreamController {
 
     @PutMapping("/updateUnitPrice")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<IcecreamDto> updateUnitPriceById(@RequestBody IcecreamDto icecreamDto) {
+    public ResponseEntity<Map<String, String>> updateUnitPriceById(@RequestBody IcecreamDto icecreamDto) {
         try {
-            IcecreamDto icecream = icecreamService.updateUnitPriceById(icecreamDto);
-            if (icecream != null) {
-                return new ResponseEntity<>(icecream, HttpStatus.OK);
+            boolean updatedPrice = icecreamService.updateUnitPriceById(icecreamDto);
+            if (updatedPrice) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Photo updated successfully");
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
@@ -59,17 +61,21 @@ public class IcecreamController {
 
     @PutMapping("/updateUrlPhoto")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<IcecreamDto> updateUrlPhotoById(@RequestBody IcecreamDto icecreamDto) {
+    public ResponseEntity<Map<String, String>> updateUrlPhotoById(@RequestBody IcecreamDto icecreamDto) {
         try {
-            IcecreamDto icecream = icecreamService.updateUrlPhotoById(icecreamDto);
-            if (icecream != null) {
-                return new ResponseEntity<>(icecream, HttpStatus.OK);
+            boolean updatedPhoto = icecreamService.updateUrlPhotoById(icecreamDto);
+            if (updatedPhoto) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Photo updated successfully");
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
 
 
