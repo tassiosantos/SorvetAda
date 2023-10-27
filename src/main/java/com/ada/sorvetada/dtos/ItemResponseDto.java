@@ -1,7 +1,7 @@
 package com.ada.sorvetada.dtos;
 
 import com.ada.sorvetada.entities.Item;
-import javax.validation.constraints.NotNull;
+
 
 public record ItemResponseDto(
         Long idItem,
