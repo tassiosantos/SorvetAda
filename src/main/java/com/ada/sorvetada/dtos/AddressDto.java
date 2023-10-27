@@ -15,6 +15,7 @@ public class AddressDto {
     private String logradouro;
     private String bairro;
     private String localidade;
+    private int numeroCasa;
     private String uf;
 
     private Long customerId;

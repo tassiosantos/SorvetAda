@@ -65,6 +65,8 @@ public class IcecreamService {
             icecream.setUrlPhoto(icecreamDto.getUrlPhoto());
             Icecream updatedIcecream = icecreamRepository.save(icecream);
             createNewIcecream(updatedIcecream);
+        } else {
+            return false;
         }
         return true;
     }

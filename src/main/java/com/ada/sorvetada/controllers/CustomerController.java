@@ -114,7 +114,7 @@ public class CustomerController {
         if (authenticatedCustomer != null) {
             return new ResponseEntity<>(authenticatedCustomer, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED); // Ou outro código de status apropriado
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 }

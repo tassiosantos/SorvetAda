@@ -20,7 +20,10 @@ public class Address {
     private String logradouro;
     private String bairro;
     private String localidade;
+    private int numeroCasa;
     private String uf;
+
+
 
     @ManyToOne
     private Customer customer;

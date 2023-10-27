@@ -38,8 +38,10 @@ public class AddressService {
                adressDto.getLogradouro(),
                adressDto.getBairro(),
                adressDto.getLocalidade(),
+               adressDto.getNumeroCasa(),
                adressDto.getUf(),
                customer);
+
        Address savedAddress = addressRepository.save(address);
        return createAddressDto(savedAddress);
     }
@@ -52,6 +54,7 @@ public class AddressService {
                 adressDto.getLogradouro(),
                 adressDto.getBairro(),
                 adressDto.getLocalidade(),
+                adressDto.getNumeroCasa(),
                 adressDto.getUf(),
                 customer);
         Address savedAddress = addressRepository.save(address);
@@ -68,6 +71,7 @@ public class AddressService {
                .bairro(address.getBairro())
                .localidade(address.getLocalidade())
                .logradouro(address.getLogradouro())
+               .numeroCasa(address.getNumeroCasa())
                .uf(address.getUf())
                .customerId(address.getCustomer().getId())
                .build();
