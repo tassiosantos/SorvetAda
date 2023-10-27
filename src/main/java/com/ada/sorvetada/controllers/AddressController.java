@@ -22,7 +22,7 @@ public class AddressController {
 
     @RequestMapping("/consulta")
     public ResponseEntity requestCep(@RequestBody AddressDto addressRequest){
-        return ResponseEntity.ok(addressService.requestCep1(addressRequest));
+        return ResponseEntity.ok(addressService.requestCep(addressRequest));
     }
 
     @PostMapping("/new")

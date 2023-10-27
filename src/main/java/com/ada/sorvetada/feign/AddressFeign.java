@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(url = "https://viacep.com.br/ws/", name = "viacep" )
 public interface AddressFeign {
     @GetMapping("{cep}/json")
-    AddressDto searchAddressCep1(@PathVariable("cep") String cep);
+    AddressDto searchAddressCep(@PathVariable("cep") String cep);
 }
