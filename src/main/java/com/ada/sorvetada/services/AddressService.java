@@ -79,4 +79,14 @@ public class AddressService {
        return addressRepository.findByCustomer(customerRepository.findById(customerDto.getId())).stream()
                .map(address -> createAddressDto(address)).toList();
     }
+
+    public boolean deleteAddress(Long id) {
+       Optional<Address> optAdress = addressRepository.findById(id);
+       if(optAdress.isPresent()){
+           addressRepository.deleteById(id);
+           return true;
+       }else{
+           throw new RuntimeException("Endereço não encontrado.");
+       }
+    }
 }
