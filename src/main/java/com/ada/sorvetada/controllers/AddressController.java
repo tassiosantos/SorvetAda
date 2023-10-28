@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.ada.sorvetada.services.AddressService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -54,6 +56,24 @@ public class AddressController {
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Map<String, String>> deleteAddress(@PathVariable Long id){
+        try {
+            boolean deletedAddress = addressService.deleteAddress(id);
+            if(deletedAddress) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Address deleted successfully");
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch (Exception e){
+            return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 
     @GetMapping("/getall")
